@@ -8,6 +8,9 @@
 
 ## 硬件组成
 
+![image](https://github.com/BG6TPX/Home_monitor/blob/master/Hardware/Layout.png)
+
+**硬件整体布局**
 
 ### 1.电源部分
 
