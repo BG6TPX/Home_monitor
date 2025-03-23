@@ -33,7 +33,7 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-#define STM32_TX     PA9   //UART
+#define STM32_TX     PA9    //UART
 #define STM32_RX     PA10
 #define STM32_DM     PA11   //USB
 #define STM32_DP     PA12
