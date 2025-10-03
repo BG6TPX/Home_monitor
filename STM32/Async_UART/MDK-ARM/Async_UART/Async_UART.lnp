@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"async_uart\startup_stm32f103xe.o"
+"async_uart\main.o"
+"async_uart\gpio.o"
+"async_uart\usart.o"
+"async_uart\stm32f1xx_it.o"
+"async_uart\stm32f1xx_hal_msp.o"
+"async_uart\stm32f1xx_hal_gpio_ex.o"
+"async_uart\stm32f1xx_hal_uart.o"
+"async_uart\stm32f1xx_hal.o"
+"async_uart\stm32f1xx_hal_rcc.o"
+"async_uart\stm32f1xx_hal_rcc_ex.o"
+"async_uart\stm32f1xx_hal_gpio.o"
+"async_uart\stm32f1xx_hal_dma.o"
+"async_uart\stm32f1xx_hal_cortex.o"
+"async_uart\stm32f1xx_hal_pwr.o"
+"async_uart\stm32f1xx_hal_flash.o"
+"async_uart\stm32f1xx_hal_flash_ex.o"
+"async_uart\stm32f1xx_hal_exti.o"
+"async_uart\system_stm32f1xx.o"
+--strict --scatter "Async_UART\Async_UART.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Async_UART.map" -o Async_UART\Async_UART.axf
