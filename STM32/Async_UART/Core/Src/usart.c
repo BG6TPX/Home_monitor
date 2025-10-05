@@ -21,7 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+extern uint8_t Rxdata[100];
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -118,5 +118,25 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+//TX interrupt callback
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart1)
+  {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+  }
+}
+
+//RX interrupt callback
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart1)
+  {
+    HAL_UART_Transmit_IT(&huart1, Rxdata, 1);
+
+    HAL_UART_Receive_IT(&huart1, Rxdata, 1);
+  }
+}
 
 /* USER CODE END 1 */

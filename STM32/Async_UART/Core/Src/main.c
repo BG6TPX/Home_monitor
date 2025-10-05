@@ -38,7 +38,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+  uint8_t Rxdata[100] = {0};
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -90,20 +90,38 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  uint8_t data[] = "MR XOYO";
-  const uint8_t *data_ptr = &data;
+  uint8_t Txdata[] = "MR XOYO\r\n";
+  uint8_t *Txdata_ptr = Txdata;
+
+  uint8_t *Rxdata_ptr = Rxdata;
+
   uint32_t timeout = 0xffff;
+
+  uint8_t tx_loop_cnt = 0;
+  /*interrupt style*/
+  HAL_UART_Receive_IT(&huart1, Rxdata_ptr, 1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_UART_Transmit(&huart1, data_ptr, sizeof(data), timeout);
+    /*Timeout style*/
+    //HAL_UART_Transmit(&huart1, Txdata_ptr, sizeof(Txdata), timeout);
+
+    if((huart1.gState == HAL_UART_STATE_READY) && (tx_loop_cnt <= 10))
+    {
+      if(HAL_UART_Transmit_IT(&huart1, Txdata_ptr, sizeof(Txdata)) == HAL_OK)
+      {
+        tx_loop_cnt++;
+      }
+    }
+  
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    HAL_Delay(1000);  //delay 1s
+    HAL_Delay(2000);  //delay 2s
   }
   /* USER CODE END 3 */
 }
